@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/", "AdController@adsList");
+
+Route::get("ads_sort/{order}", "AdController@adsList");
+
+Route::match(['get', 'post'], "new_ad", "AdController@newAd");
+
+Route::post("show_details", "AdController@showAdDetails");

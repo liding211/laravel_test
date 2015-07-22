@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@extends('layouts.main')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('title', 'New ad')
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@section('add_button')
+@endsection
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+@section('content')
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+    @if (count($errors) > 0)
+        <div class="alerts">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </body>
-</html>
+    @endif
+
+<form action="<?= url('new_ad'); ?>" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" name="title"></td>
+            </tr>
+            <tr>
+                <td>Text:</td>
+                <td><textarea name="text"></textarea></td>
+            </tr>
+            <tr>
+                <td>Image:</td>
+                <td><input type="file" name="image"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" name="submit" value="Add"></td>
+            </tr>
+        </table>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+    </form>
+@endsection
