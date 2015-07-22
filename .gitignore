@@ -3,3 +3,5 @@
 Homestead.yaml
 .env
 /config/database.php
+composer.lock
+/public/upload
